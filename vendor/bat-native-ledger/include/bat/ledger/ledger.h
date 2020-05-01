@@ -287,6 +287,29 @@ class LEDGER_EXPORT Ledger {
                              const std::map<std::string, std::string>& data,
                              ledger::PublisherInfoCallback callback) = 0;
 
+  virtual void UpdateMediaDuration(
+      const std::string& media_type,
+      const std::string& media_id,
+      const std::string& media_key,
+      const std::string& url,
+      uint64_t duration) = 0;
+
+  virtual void SaveMediaVisitYoutubeChannel(
+      const std::string& url,
+      const std::string& channel_id,
+      const std::string& publisher_key,
+      const std::string& favicon_url,
+      const std::string& title) = 0;
+
+  virtual void SaveMediaVisitYoutubeUser(
+      const std::string& url,
+      const std::string& channel_id,
+      const std::string& publisher_key,
+      const std::string& media_key) = 0;
+
+  virtual void SaveMediaVisitYoutubeWatch(
+      const std::string& url) = 0;
+
   virtual void SetInlineTippingPlatformEnabled(
       const ledger::InlineTipsPlatforms platform,
       bool enabled) = 0;

@@ -355,6 +355,94 @@
         "parameters": []
       },
       {
+        "name": "updateMediaDuration",
+        "type": "function",
+        "description": "Update the media duration for a given resource",
+        "parameters": [
+          {
+            "name": "mediaType",
+            "type": "string"
+          },
+          {
+            "name": "mediaId",
+            "type": "string"
+          },
+          {
+            "name": "mediaKey",
+            "type": "string"
+          },
+          {
+            "name": "url",
+            "type": "string"
+          },
+          {
+            "name": "duration",
+            "type": "integer"
+          }
+        ]
+      },
+      {
+        "name": "saveMediaVisitYoutubeChannel",
+        "type": "function",
+        "description": "Save the details when visiting a YouTube channel path",
+        "parameters": [
+          {
+            "name": "url",
+            "type": "string"
+          },
+          {
+            "name": "channelId",
+            "type": "string"
+          },
+          {
+            "name": "publisherKey",
+            "type": "string"
+          },
+          {
+            "name": "favIconUrl",
+            "type": "string"
+          },
+          {
+            "name": "title",
+            "type": "string"
+          }
+        ]
+      },
+      {
+        "name": "saveMediaVisitYoutubeUser",
+        "type": "function",
+        "description": "Save the details when visiting a YouTube user path",
+        "parameters": [
+          {
+            "name": "url",
+            "type": "string"
+          },
+          {
+            "name": "channelId",
+            "type": "string"
+          },
+          {
+            "name": "publisherKey",
+            "type": "string"
+          },
+          {
+            "name": "mediaKey",
+            "type": "string"
+          }
+        ]
+      },
+      {
+        "name": "saveMediaVisitYoutubeWatch",
+        "type": "function",
+        "description": "Save the details when visiting a YouTube watch path",
+        "parameters": [
+          {
+            "name": "url",
+            "type": "string"
+          }
+        ]
+      },
+      {
         "name": "tipSite",
         "type": "function",
         "description": "Allow the user to perform a tip to a tab's site",

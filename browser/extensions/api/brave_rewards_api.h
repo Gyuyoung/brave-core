@@ -48,6 +48,49 @@ class BraveRewardsOpenBrowserActionUIFunction :
   ResponseAction Run() override;
 };
 
+class BraveRewardsUpdateMediaDurationFunction : public ExtensionFunction {
+ public:
+  DECLARE_EXTENSION_FUNCTION("braveRewards.updateMediaDuration", UNKNOWN)
+
+ protected:
+  ~BraveRewardsUpdateMediaDurationFunction() override;
+
+  ResponseAction Run() override;
+};
+
+class BraveRewardsSaveMediaVisitYoutubeChannelFunction
+    : public ExtensionFunction {
+ public:
+  DECLARE_EXTENSION_FUNCTION("braveRewards.saveMediaVisitYoutubeChannel",
+                             UNKNOWN)
+
+ protected:
+  ~BraveRewardsSaveMediaVisitYoutubeChannelFunction() override;
+
+  ResponseAction Run() override;
+};
+
+class BraveRewardsSaveMediaVisitYoutubeUserFunction : public ExtensionFunction {
+ public:
+  DECLARE_EXTENSION_FUNCTION("braveRewards.saveMediaVisitYoutubeUser", UNKNOWN)
+
+ protected:
+  ~BraveRewardsSaveMediaVisitYoutubeUserFunction() override;
+
+  ResponseAction Run() override;
+};
+
+class BraveRewardsSaveMediaVisitYoutubeWatchFunction
+    : public ExtensionFunction {
+ public:
+  DECLARE_EXTENSION_FUNCTION("braveRewards.saveMediaVisitYoutubeWatch", UNKNOWN)
+
+ protected:
+  ~BraveRewardsSaveMediaVisitYoutubeWatchFunction() override;
+
+  ResponseAction Run() override;
+};
+
 class BraveRewardsTipSiteFunction : public ExtensionFunction {
  public:
   DECLARE_EXTENSION_FUNCTION("braveRewards.tipSite", UNKNOWN)

@@ -159,6 +159,29 @@ class BatLedgerImpl :
       const base::flat_map<std::string, std::string>& args,
       SaveMediaInfoCallback callback) override;
 
+  void UpdateMediaDuration(
+      const std::string& media_type,
+      const std::string& media_id,
+      const std::string& media_key,
+      const std::string& url,
+      uint64_t duration) override;
+
+  void SaveMediaVisitYoutubeChannel(
+      const std::string& url,
+      const std::string& channel_id,
+      const std::string& publisher_key,
+      const std::string& favicon_url,
+      const std::string& title) override;
+
+  void SaveMediaVisitYoutubeUser(
+      const std::string& url,
+      const std::string& channel_id,
+      const std::string& publisher_key,
+      const std::string& media_key) override;
+
+  void SaveMediaVisitYoutubeWatch(
+      const std::string& url) override;
+
   void SetInlineTippingPlatformEnabled(
       const ledger::InlineTipsPlatforms platform,
       bool enabled) override;

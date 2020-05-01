@@ -2220,6 +2220,51 @@ void RewardsServiceImpl::SaveInlineMediaInfo(
                     std::move(callback)));
 }
 
+void RewardsServiceImpl::UpdateMediaDuration(
+    const std::string& media_type,
+    const std::string& media_id,
+    const std::string& media_key,
+    const std::string& url,
+    uint64_t duration) {
+  bat_ledger_->UpdateMediaDuration(
+      media_type,
+      media_id,
+      media_key,
+      url,
+      duration);
+}
+
+void RewardsServiceImpl::SaveMediaVisitYoutubeChannel(
+    const std::string& url,
+    const std::string& channel_id,
+    const std::string& publisher_key,
+    const std::string& favicon_url,
+    const std::string& title) {
+  bat_ledger_->SaveMediaVisitYoutubeChannel(
+      url,
+      channel_id,
+      publisher_key,
+      favicon_url,
+      title);
+}
+
+void RewardsServiceImpl::SaveMediaVisitYoutubeUser(
+    const std::string& url,
+    const std::string& channel_id,
+    const std::string& publisher_key,
+    const std::string& media_key) {
+  bat_ledger_->SaveMediaVisitYoutubeUser(
+      url,
+      channel_id,
+      publisher_key,
+      media_key);
+}
+
+void RewardsServiceImpl::SaveMediaVisitYoutubeWatch(
+    const std::string& url) {
+  bat_ledger_->SaveMediaVisitYoutubeWatch(url);
+}
+
 void RewardsServiceImpl::OnGetRecurringTips(
     GetRecurringTipsCallback callback,
     ledger::PublisherInfoList list) {

@@ -651,6 +651,42 @@ void BatLedgerImpl::SaveMediaInfo(
       std::bind(BatLedgerImpl::OnSaveMediaInfoCallback, holder, _1, _2));
 }
 
+void BatLedgerImpl::UpdateMediaDuration(
+    const std::string& media_type,
+    const std::string& media_id,
+    const std::string& media_key,
+    const std::string& url,
+    uint64_t duration) {
+  ledger_->UpdateMediaDuration(media_type, media_id, media_key, url, duration);
+}
+
+void BatLedgerImpl::SaveMediaVisitYoutubeChannel(
+    const std::string& url,
+    const std::string& channel_id,
+    const std::string& publisher_key,
+    const std::string& favicon_url,
+    const std::string& title) {
+  ledger_->SaveMediaVisitYoutubeChannel(
+      url,
+      channel_id,
+      publisher_key,
+      favicon_url,
+      title);
+}
+
+void BatLedgerImpl::SaveMediaVisitYoutubeUser(
+    const std::string& url,
+    const std::string& channel_id,
+    const std::string& publisher_key,
+    const std::string& media_key) {
+  ledger_->SaveMediaVisitYoutubeUser(url, channel_id, publisher_key, media_key);
+}
+
+void BatLedgerImpl::SaveMediaVisitYoutubeWatch(
+  const std::string& url) {
+  ledger_->SaveMediaVisitYoutubeWatch(url);
+}
+
 void BatLedgerImpl::OnRefreshPublisher(
     CallbackHolder<RefreshPublisherCallback>* holder,
     ledger::PublisherStatus status) {

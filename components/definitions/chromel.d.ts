@@ -65,6 +65,10 @@ declare namespace chrome.settingsPrivate {
 declare namespace chrome.braveRewards {
   const createWallet: () => {}
   const getRewardsParameters: (callback: (properties: RewardsExtension.RewardsParameters) => void) => {}
+  const updateMediaDuration: (mediaType: string, mediaId: string, mediaKey: string, url: string, duration: integer) => {}
+  const saveMediaVisitYoutubeChannel: (url: string, channelId: string, publisherKey: string, favIconUrl: string, title: string) => {}
+  const saveMediaVisitYoutubeUser: (url: string, channelId: string, publisherKey: string, mediaKey: string) => {}
+  const saveMediaVisitYoutubeWatch: (url: string) => {}
   const tipSite: (tabId: number, publisherKey: string, monthly: boolean) => {}
   const tipTwitterUser: (tabId: number, mediaMetaData: RewardsTip.MediaMetaData) => {}
   const tipRedditUser: (tabId: number, mediaMetaData: RewardsTip.MediaMetaData) => {}

@@ -273,6 +273,8 @@ source_set("ledger") {
     "src/bat/ledger/internal/publisher/publisher_prefix_list_updater.h",
     "src/bat/ledger/internal/publisher/publisher_status_helper.cc",
     "src/bat/ledger/internal/publisher/publisher_status_helper.h",
+    "src/bat/ledger/internal/publisher/publisher_youtube.cc",
+    "src/bat/ledger/internal/publisher/publisher_youtube.h",
     "src/bat/ledger/internal/publisher/server_publisher_fetcher.cc",
     "src/bat/ledger/internal/publisher/server_publisher_fetcher.h",
     "src/bat/ledger/internal/recovery/recovery.cc",

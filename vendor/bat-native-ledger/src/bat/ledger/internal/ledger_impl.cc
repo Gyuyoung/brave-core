@@ -1070,6 +1070,51 @@ void LedgerImpl::SaveMediaInfo(const std::string& type,
   bat_media_->SaveMediaInfo(type, data, callback);
 }
 
+void LedgerImpl::UpdateMediaDuration(
+    const std::string& media_type,
+    const std::string& media_id,
+    const std::string& media_key,
+    const std::string& url,
+    uint64_t duration) {
+  bat_publisher_->UpdateMediaDuration(
+      media_type,
+      media_id,
+      media_key,
+      url,
+      duration);
+}
+
+void LedgerImpl::SaveMediaVisitYoutubeChannel(
+    const std::string& url,
+    const std::string& channel_id,
+    const std::string& publisher_key,
+    const std::string& favicon_url,
+    const std::string& title) {
+  bat_publisher_->SaveMediaVisitYoutubeChannel(
+      url,
+      channel_id,
+      publisher_key,
+      favicon_url,
+      title);
+}
+
+void LedgerImpl::SaveMediaVisitYoutubeUser(
+    const std::string& url,
+    const std::string& channel_id,
+    const std::string& publisher_key,
+    const std::string& media_key) {
+  bat_publisher_->SaveMediaVisitYoutubeUser(
+      url,
+      channel_id,
+      publisher_key,
+      media_key);
+}
+
+void LedgerImpl::SaveMediaVisitYoutubeWatch(
+    const std::string& url) {
+  bat_publisher_->SaveMediaVisitYoutubeWatch(url);
+}
+
 void LedgerImpl::SetInlineTippingPlatformEnabled(
     const ledger::InlineTipsPlatforms platform,
     bool enabled) {

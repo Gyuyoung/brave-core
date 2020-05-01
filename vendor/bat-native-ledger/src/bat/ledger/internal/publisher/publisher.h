@@ -12,6 +12,7 @@
 #include <vector>
 
 #include "base/gtest_prod_util.h"
+#include "bat/ledger/internal/publisher/publisher_youtube.h"
 #include "bat/ledger/ledger.h"
 
 namespace bat_ledger {
@@ -84,6 +85,29 @@ class Publisher {
   void SynopsisNormalizer();
 
   void CalcScoreConsts(const int min_duration_seconds);
+
+  void UpdateMediaDuration(
+      const std::string& media_type,
+      const std::string& media_id,
+      const std::string& media_key,
+      const std::string& url,
+      uint64_t duration);
+
+  void SaveMediaVisitYoutubeChannel(
+      const std::string& url,
+      const std::string& channel_id,
+      const std::string& publisher_key,
+      const std::string& favicon_url,
+      const std::string& title);
+
+  void SaveMediaVisitYoutubeUser(
+      const std::string& url,
+      const std::string& channel_id,
+      const std::string& publisher_key,
+      const std::string& media_key);
+
+  void SaveMediaVisitYoutubeWatch(
+      const std::string& url);
 
  private:
   void onPublisherActivitySave(uint64_t windowId,
@@ -161,6 +185,7 @@ class Publisher {
   bat_ledger::LedgerImpl* ledger_;  // NOT OWNED
   std::unique_ptr<PublisherPrefixListUpdater> prefix_list_updater_;
   std::unique_ptr<ServerPublisherFetcher> server_publisher_fetcher_;
+  std::unique_ptr<braveledger_publisher::YouTube> publisher_youtube_;
 
   // For testing purposes
   friend class PublisherTest;

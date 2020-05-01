@@ -117,6 +117,12 @@ interface BatLedger {
   SaveMediaInfo(string type, map<string, string> args) =>
     (ledger.mojom.Result result, ledger.mojom.PublisherInfo? publisher_info);
 
+  UpdateMediaDuration(string media_type, string media_id, string media_key, string url, uint64 duration);
+
+  SaveMediaVisitYoutubeChannel(string url, string channel_id, string publisher_key, string favicon_url, string title);
+  SaveMediaVisitYoutubeUser(string url, string channel_id, string publisher_key, string media_key);
+  SaveMediaVisitYoutubeWatch(string url);
+
   SetInlineTippingPlatformEnabled(ledger.mojom.InlineTipsPlatforms platform, bool enabled);
 
   GetInlineTippingPlatformEnabled(ledger.mojom.InlineTipsPlatforms platform) => (bool enabled);
