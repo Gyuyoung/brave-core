@@ -21,6 +21,7 @@ constexpr char kLogValueKey[] = "value";
 constexpr char kLogSentKey[] = "sent";
 constexpr char kLogTimestampKey[] = "timestamp";
 
+// TODO(Moritz Haller): Will this count P2A questions?
 void RecordP3A(uint64_t answers_count) {
   int answer = 0;
   if (1 <= answers_count && answers_count < 5) {

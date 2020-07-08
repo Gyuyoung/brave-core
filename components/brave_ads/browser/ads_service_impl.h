@@ -59,6 +59,8 @@ namespace brave_ads {
 
 class AdsNotificationHandler;
 
+class AdsP2A;
+
 class AdsServiceImpl : public AdsService,
                        public ads::AdsClient,
                        public history::HistoryServiceObserver,
@@ -479,6 +481,8 @@ class AdsServiceImpl : public AdsService,
   PrefChangeRegistrar profile_pref_change_registrar_;
 
   base::flat_set<network::SimpleURLLoader*> url_loaders_;
+
+  std::unique_ptr<AdsP2A> ads_p2a_;
 
   NotificationDisplayService* display_service_;  // NOT OWNED
   brave_rewards::RewardsService* rewards_service_;  // NOT OWNED

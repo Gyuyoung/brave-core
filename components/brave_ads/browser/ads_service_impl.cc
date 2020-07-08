@@ -32,6 +32,7 @@
 #include "bat/ads/resources/grit/bat_ads_resources.h"
 #include "brave/components/brave_ads/browser/ad_notification.h"
 #include "brave/components/brave_ads/browser/ads_notification_handler.h"
+#include "brave/components/brave_ads/browser/ads_p2a.h"
 #include "brave/components/brave_ads/common/pref_names.h"
 #include "brave/components/brave_ads/common/switches.h"
 #include "brave/components/brave_rewards/browser/rewards_notification_service.h"
@@ -206,6 +207,7 @@ AdsServiceImpl::AdsServiceImpl(Profile* profile) :
     base_path_(profile_->GetPath().AppendASCII("ads_service")),
     database_(new ads::Database(base_path_.AppendASCII("database.sqlite"))),
     last_idle_state_(ui::IdleState::IDLE_STATE_ACTIVE),
+    ads_p2a_(new AdsP2A()),
     display_service_(NotificationDisplayService::GetForProfile(profile_)),
     rewards_service_(brave_rewards::RewardsServiceFactory::GetForProfile(
         profile_)),
@@ -1892,6 +1894,11 @@ void AdsServiceImpl::ConfirmAd(
     const ads::AdInfo& info,
     const ads::ConfirmationType confirmation_type) {
   rewards_service_->ConfirmAd(info.ToJson(), confirmation_type);
+
+  if (confirmation_type.value() == ads::ConfirmationType::kViewed) {
+    ads_p2a_->RecordEventInWeeklyStorage(profile_->GetPrefs(),
+        "brave.weekly_storage.ad_view_confirmation_count");
+  }
 }
 
 void AdsServiceImpl::ConfirmAction(
