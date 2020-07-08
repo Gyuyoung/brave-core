@@ -511,7 +511,11 @@ void LedgerImpl::SaveMediaVisit(const std::string& publisher_id,
                                 const ledger::PublisherInfoCallback callback) {
   uint64_t new_duration = duration;
   if (!braveledger_state::GetPublisherAllowVideos(this)) {
-    new_duration = 0;
+    if (visit_data.provider == YOUTUBE_MEDIA_TYPE ||
+        visit_data.provider == TWITCH_MEDIA_TYPE ||
+        visit_data.provider == VIMEO_MEDIA_TYPE) {
+      new_duration = 0;
+    }
   }
 
   bat_publisher_->SaveVisit(publisher_id,
