@@ -8,7 +8,6 @@
 #include <memory>
 
 #include "brave/browser/brave_browser_process_impl.h"
-#include "brave/browser/tor/buildflags.h"
 #include "brave/common/extensions/extension_constants.h"
 #include "brave/common/pref_names.h"
 #include "brave/browser/extensions/brave_extension_provider.h"
@@ -19,39 +18,18 @@
 #include "extensions/common/extension.h"
 #include "extensions/common/extension_urls.h"
 
-#if BUILDFLAG(ENABLE_TOR)
-#include "brave/browser/extensions/brave_tor_client_updater.h"
-#endif
-
 namespace extensions {
 
 BraveExtensionManagement::BraveExtensionManagement(Profile* profile)
     : ExtensionManagement(profile),
-      extension_registry_observer_(this),
-      profile_(profile) {
+      extension_registry_observer_(this) {
   extension_registry_observer_.Add(ExtensionRegistry::Get(
         static_cast<content::BrowserContext*>(profile)));
   providers_.push_back(
       std::make_unique<BraveExtensionProvider>());
-  CleanupBraveExtensions();
-  RegisterBraveExtensions();
 }
 
 BraveExtensionManagement::~BraveExtensionManagement() {
-}
-
-void BraveExtensionManagement::RegisterBraveExtensions() {
-#if BUILDFLAG(ENABLE_TOR)
-  if (!profile_->AsTestingProfile())
-    g_brave_browser_process->tor_client_updater()->Register();
-#endif
-}
-
-void BraveExtensionManagement::CleanupBraveExtensions() {
-#if BUILDFLAG(ENABLE_TOR)
-  if (!profile_->AsTestingProfile())
-    g_brave_browser_process->tor_client_updater()->Cleanup();
-#endif
 }
 
 void BraveExtensionManagement::OnExtensionLoaded(

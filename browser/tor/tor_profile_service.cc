@@ -85,4 +85,22 @@ void TorProfileService::RemoveObserver(TorLauncherServiceObserver* observer) {
   observers_.RemoveObserver(observer);
 }
 
+void TorProfileService::RegisterTorClientUpdater() {
+  if (g_brave_browser_process) {
+    g_brave_browser_process->tor_client_updater()->Register();
+  }
+}
+
+void TorProfileService::UnregisterTorClientUpdater() {
+  if (g_brave_browser_process) {
+    g_brave_browser_process->tor_client_updater()->Unregister();
+  }
+}
+
+void TorProfileService::CleanupTorClientUpdater() {
+  if (g_brave_browser_process) {
+    g_brave_browser_process->tor_client_updater()->Cleanup();
+  }
+}
+
 }  // namespace tor

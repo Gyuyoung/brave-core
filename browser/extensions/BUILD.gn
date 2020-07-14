@@ -75,7 +75,6 @@ source_set("extensions") {
   deps = [
     "//base",
     "//brave/app:brave_generated_resources_grit",
-    "//brave/browser/tor:buildflags",
     "//brave/browser/webcompat_reporter",
     "//brave/common",
     "//brave/common:pref_names",

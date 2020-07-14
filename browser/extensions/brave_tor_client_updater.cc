@@ -135,6 +135,12 @@ void BraveTorClientUpdater::Register() {
   registered_ = true;
 }
 
+void BraveTorClientUpdater::Unregister() {
+  // We don't call BraveComponent::Unregister here in order to prevent tor
+  // executable component from getting deleted when last tor window closed
+  registered_ = false;
+}
+
 void BraveTorClientUpdater::Cleanup() {
   // Delete tor binaries if tor is disabled by gpo.
   if (tor::TorProfileService::IsTorDisabled()) {
