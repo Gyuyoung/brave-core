@@ -1111,19 +1111,6 @@ BATLedgerReadonlyBridge(BOOL, isWalletCreated, IsWalletCreated)
   });
 }
 
-- (void)loadNicewareList:(ledger::GetNicewareListCallback)callback
-{
-  NSError *error;
-  const auto bundle = [NSBundle bundleForClass:[BATBraveLedger class]];
-  const auto path = [bundle pathForResource:@"wordlist" ofType:nil];
-  const auto contents = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&error];
-  if (error || contents.length == 0) {
-    callback(ledger::Result::LEDGER_ERROR, "");
-  } else {
-    callback(ledger::Result::LEDGER_OK, std::string(contents.UTF8String));
-  }
-}
-
 #pragma mark - Reporting
 
 - (void)setSelectedTabId:(UInt32)selectedTabId

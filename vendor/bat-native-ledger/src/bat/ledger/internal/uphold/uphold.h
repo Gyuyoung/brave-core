@@ -61,7 +61,7 @@ class Uphold {
       const std::map<std::string, std::string>& args,
       ledger::ExternalWalletAuthorizationCallback callback);
 
-  void TransferAnonToExternalWallet(ledger::ExternalWalletCallback callback);
+  void ClaimFunds(ledger::ExternalWalletCallback callback);
 
   void GenerateExternalWallet(ledger::ExternalWalletCallback callback);
 

@@ -203,7 +203,6 @@ std::string SignatureHeaderValue(
     const std::string key_id,
     const std::vector<uint8_t>& private_key,
     const bool idempotency_key) {
-  DCHECK(!body.empty());
   DCHECK(!private_key.empty());
 
   auto digest_header_value = DigestValue(body);

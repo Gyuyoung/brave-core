@@ -214,7 +214,7 @@ void Uphold::WalletAuthorization(
   authorization_->Authorize(args, callback);
 }
 
-void Uphold::TransferAnonToExternalWallet(
+void Uphold::ClaimFunds(
     ledger::ExternalWalletCallback callback) {
   auto transfer_callback = std::bind(
       &Uphold::OnTransferAnonToExternalWalletCallback,
@@ -223,7 +223,7 @@ void Uphold::TransferAnonToExternalWallet(
       callback);
 
   // transfer funds from anon wallet to uphold
-  ledger_->TransferAnonToExternalWallet(transfer_callback);
+  ledger_->ClaimFunds(transfer_callback);
 }
 
 void Uphold::GenerateExternalWallet(ledger::ExternalWalletCallback callback) {

@@ -11,6 +11,7 @@
 #include "bat/ledger/internal/ledger_impl.h"
 #include "bat/ledger/internal/attestation/attestation_androidx.h"
 #include "bat/ledger/internal/request/request_attestation.h"
+#include "bat/ledger/internal/state/state_util.h"
 #include "net/http/http_status_code.h"
 
 using std::placeholders::_1;
@@ -67,7 +68,7 @@ void AttestationAndroid::Start(
   const std::string url =
       braveledger_request_util::GetStartAttestationAndroidUrl();
 
-  auto payment_id = base::Value(ledger_->GetPaymentId());
+  auto payment_id = base::Value(braveledger_state::GetPaymentId(ledger_));
   base::Value payment_ids(base::Value::Type::LIST);
   payment_ids.Append(std::move(payment_id));
 

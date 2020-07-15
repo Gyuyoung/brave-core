@@ -31,20 +31,19 @@ WalletBalance::WalletBalance(bat_ledger::LedgerImpl* ledger) :
     ledger_(ledger) {
 }
 
-WalletBalance::~WalletBalance() {
-}
+WalletBalance::~WalletBalance() = default;
 
 void WalletBalance::Fetch(ledger::FetchBalanceCallback callback) {
   // if we don't have user funds in anon card anymore
   // we can skip balance server ping
   if (!braveledger_state::GetFetchOldBalanceEnabled(ledger_)) {
-    auto balance = ledger::WalletBalance::New();
+    auto balance = ledger::Balance::New();
     balance->user_funds = "0";
     GetUnblindedTokens(std::move(balance), callback);
     return;
   }
 
-  std::string payment_id = ledger_->GetPaymentId();
+  std::string payment_id = braveledger_state::GetPaymentId(ledger_);
 
   std::string path = base::StringPrintf(
       "/wallet/%s/balance",
@@ -63,7 +62,7 @@ void WalletBalance::Fetch(ledger::FetchBalanceCallback callback) {
 void WalletBalance::OnFetch(
     const ledger::UrlResponse& response,
     ledger::FetchBalanceCallback callback) {
-  ledger::BalancePtr balance = ledger::WalletBalance::New();
+  ledger::BalancePtr balance = ledger::Balance::New();
   BLOG(6, ledger::UrlResponseToString(__func__, response));
   if (response.status_code != net::HTTP_OK) {
     callback(ledger::Result::LEDGER_ERROR, std::move(balance));
@@ -130,7 +129,7 @@ void WalletBalance::OnGetUnblindedTokens(
     ledger::Balance info,
     ledger::FetchBalanceCallback callback,
     ledger::UnblindedTokenList list) {
-  auto info_ptr = ledger::WalletBalance::New(info);
+  auto info_ptr = ledger::Balance::New(info);
   double total = 0.0;
   for (auto & item : list) {
     total+=item->value;
@@ -170,7 +169,7 @@ void WalletBalance::OnUpholdFetchBalance(ledger::Balance info,
                                    ledger::FetchBalanceCallback callback,
                                    ledger::Result result,
                                    double balance) {
-  ledger::BalancePtr info_ptr = ledger::WalletBalance::New(info);
+  ledger::BalancePtr info_ptr = ledger::Balance::New(info);
 
   if (result == ledger::Result::LEDGER_ERROR) {
     BLOG(0, "Can't get uphold balance");

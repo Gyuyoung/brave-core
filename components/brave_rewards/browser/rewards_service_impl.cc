@@ -927,14 +927,9 @@ void RewardsServiceImpl::GetAutoContributeProperties(
         callback));
 }
 
-void RewardsServiceImpl::OnRecoverWallet(
-    ledger::Result result,
-    double balance) {
+void RewardsServiceImpl::OnRecoverWallet(const ledger::Result result) {
   for (auto& observer : observers_) {
-    observer.OnRecoverWallet(
-      this,
-      static_cast<int>(result),
-      balance);
+    observer.OnRecoverWallet(this, static_cast<int>(result));
   }
 }
 
@@ -1012,22 +1007,6 @@ void RewardsServiceImpl::OnPublisherStateLoaded(
       data.empty() ? ledger::Result::NO_PUBLISHER_STATE
                    : ledger::Result::LEDGER_OK,
       data);
-}
-
-void RewardsServiceImpl::LoadNicewareList(
-  ledger::GetNicewareListCallback callback) {
-  if (!Connected()) {
-    return;
-  }
-
-  std::string data = ui::ResourceBundle::GetSharedInstance().GetRawDataResource(
-      IDR_BRAVE_REWARDS_NICEWARE_LIST).as_string();
-
-  if (data.empty()) {
-    BLOG(0, "Failed to read in niceware list");
-  }
-  callback(data.empty() ? ledger::Result::LEDGER_ERROR
-                        : ledger::Result::LEDGER_OK, data);
 }
 
 void RewardsServiceImpl::LoadURL(

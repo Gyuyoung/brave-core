@@ -260,8 +260,7 @@ class BraveRewardsNativeWorker : public brave_rewards::RewardsServiceObserver,
         const std::map<std::string, std::string>& args);
 
     void OnRecoverWallet(brave_rewards::RewardsService* rewards_service,
-                         unsigned int result,
-                         double balance) override;
+                         unsigned int result) override;
 
  private:
     std::string StdStrStrMapToJsonString(

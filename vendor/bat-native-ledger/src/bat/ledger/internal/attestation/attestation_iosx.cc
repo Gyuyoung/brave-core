@@ -11,6 +11,7 @@
 #include "bat/ledger/internal/ledger_impl.h"
 #include "bat/ledger/internal/attestation/attestation_iosx.h"
 #include "bat/ledger/internal/request/request_attestation.h"
+#include "bat/ledger/internal/state/state_util.h"
 #include "net/http/http_status_code.h"
 
 using std::placeholders::_1;
@@ -86,7 +87,7 @@ void AttestationIOS::Start(
     const std::string& payload,
     StartCallback callback) {
   const std::string key = ParseStartPayload(payload);
-  const std::string payment_id = ledger_->GetPaymentId();
+  const std::string payment_id = braveledger_state::GetPaymentId(ledger_);
 
   if (key.empty()) {
     BLOG(0, "Key is empty");

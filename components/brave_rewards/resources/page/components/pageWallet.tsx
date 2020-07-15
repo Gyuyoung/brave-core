@@ -244,12 +244,10 @@ class PageWallet extends React.Component<Props, State> {
   }
 
   walletAlerts = (): AlertWallet | null => {
-    const { total } = this.props.rewardsData.balance
     const {
       walletRecoverySuccess,
       walletServerProblem,
-      walletCorrupted,
-      onlyAnonWallet
+      walletCorrupted
     } = this.props.rewardsData.ui
 
     if (walletServerProblem) {
@@ -259,11 +257,9 @@ class PageWallet extends React.Component<Props, State> {
       }
     }
 
-    if (walletRecoverySuccess) {
-      const batFormatString = onlyAnonWallet ? getLocale('batPoints') : getLocale('bat')
-
+    if (walletRecoverySuccess === 0) {
       return {
-        node: <><b>{getLocale('walletRestored')}</b> {getLocale('walletRecoverySuccess', { balance: total.toString(), currency: batFormatString })}</>,
+        node: <><b>{getLocale('walletRestored')}</b> {getLocale('walletRecoverySuccess')}</>,
         type: 'success',
         onAlertClose: () => {
           this.actions.onClearAlert('walletRecoverySuccess')
@@ -765,6 +761,20 @@ class PageWallet extends React.Component<Props, State> {
     return (balance.wallets['anonymous'] || 0) + (balance.wallets['blinded'] || 0)
   }
 
+  getBackupErrorMessage = () => {
+    const { ui } = this.props.rewardsData
+    const { walletRecoverySuccess } = ui
+    if (walletRecoverySuccess === 1) {
+      return getLocale('walletRecoveryFail')
+    }
+
+    if (walletRecoverySuccess === 2) {
+      return getLocale('walletRecoveryOutdated')
+    }
+
+    return ''
+  }
+
   render () {
     const {
       recoveryKey,
@@ -774,7 +784,7 @@ class PageWallet extends React.Component<Props, State> {
       pendingContributionTotal
     } = this.props.rewardsData
     const { total } = balance
-    const { walletRecoverySuccess, emptyWallet, modalBackup, onlyAnonWallet } = ui
+    const { emptyWallet, modalBackup, onlyAnonWallet } = ui
 
     const pendingTotal = parseFloat((pendingContributionTotal || 0).toFixed(3))
 
@@ -833,7 +843,7 @@ class PageWallet extends React.Component<Props, State> {
               onVerify={this.onVerifyClick.bind(this, true)}
               onReset={this.onModalBackupOnReset}
               internalFunds={this.getInternalFunds()}
-              error={walletRecoverySuccess === false ? getLocale('walletRecoveryFail') : ''}
+              error={this.getBackupErrorMessage()}
             />
             : null
         }

@@ -115,8 +115,7 @@ void UpholdWallet::OnGenerate(
   }
 
   if (user.verified) {
-    ledger_->TransferTokens([](const ledger::Result){});
-    uphold_->TransferAnonToExternalWallet(callback);
+    uphold_->ClaimFunds(callback);
     return;
   }
 
@@ -140,8 +139,7 @@ void UpholdWallet::OnCreateCard(
   ledger_->SaveExternalWallet(ledger::kWalletUphold, wallet_ptr->Clone());
 
   if (wallet_ptr->status == ledger::WalletStatus::VERIFIED) {
-    ledger_->TransferTokens([](const ledger::Result){});
-    uphold_->TransferAnonToExternalWallet(callback);
+    uphold_->ClaimFunds(callback);
     return;
   }
 
