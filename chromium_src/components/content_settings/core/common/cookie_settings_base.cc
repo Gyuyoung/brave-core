@@ -22,7 +22,7 @@ constexpr char kWordpress[] = "https://[*.]wordpress.com/*";
 constexpr char kPlaystation[] = "https://[*.]playstation.com/*";
 constexpr char kSonyentertainmentnetwork[] =
     "https://[*.]sonyentertainmentnetwork.com/*";
-constexpr char kTwitch[] = "https://[*.]twitch.tv/*";
+constexpr char kTwitch[] = "https://clips.twitch.tv/embed?*";
 constexpr char kReddit[] = "https://[*.]reddit.com/*";
 constexpr char kDiscord[] = "https://[*.]discord.com/*";
 constexpr char kUbisoft[] = "https://[*.]ubisoft.com/*";
