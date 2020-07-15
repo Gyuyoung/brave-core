@@ -161,16 +161,35 @@ bool GetNextResponse(
     return false;
   }
 
-  static std::map<std::string, uint16_t> indexes;
   const URLResponses responses = iter->second;
-  if (indexes[path] == responses.size()) {
+  if (responses.empty()) {
     return false;
   }
 
-  const int index = indexes[path];
+  const ::testing::TestInfo* const test_info =
+      ::testing::UnitTest::GetInstance()->current_test_info();
+
+  const std::string indexes_path = base::StringPrintf("%s:%s.%s", path,
+      test_info->test_suite_name(), test_info->name());
+
+  uint16_t index;
+  static std::map<std::string, uint16_t> indexes;
+
+  const auto indexes_iter = indexes.find(indexes_path);
+  if (indexes_iter == indexes.end()) {
+    index = 0;
+    indexes.insert({indexes_path, index});
+  } else {
+    index = indexes_iter->second;
+  }
+
+  if (index == responses.size()) {
+    return false;
+  }
+
   *response = responses.at(index);
 
-  indexes[path]++;
+  indexes_iter->second++;
 
   return true;
 }
