@@ -23,8 +23,8 @@ constexpr char kPlaystation[] = "https://[*.]playstation.com/*";
 constexpr char kSonyentertainmentnetwork[] =
     "https://[*.]sonyentertainmentnetwork.com/*";
 constexpr char kTwitch[] = "https://clips.twitch.tv/embed?*";
-constexpr char kReddit[] = "https://[*.]reddit.com/*";
-constexpr char kDiscord[] = "https://[*.]discord.com/*";
+constexpr char kReddit[] = "https://[www|old]*.reddit.com/*";
+constexpr char kDiscord[] = "https://[*.]discord.com/channels/*";
 constexpr char kUbisoft[] = "https://[*.]ubisoft.com/*";
 constexpr char kUbi[] = "https://[*.]ubi.com/*";
 constexpr char kAmericanexpress[] = "https://[*.]americanexpress.com/*";
