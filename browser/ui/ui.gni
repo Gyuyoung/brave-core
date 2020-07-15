@@ -1,0 +1,17 @@
+# Copyright (c) 2020 The Brave Authors. All rights reserved.
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this file,
+# You can obtain one at http://mozilla.org/MPL/2.0/.
+
+import("//brave/components/brave_webtorrent/browser/buildflags/buildflags.gni")
+
+brave_browser_ui_deps = [
+  "//brave/browser/ui",
+]
+
+if (enable_brave_webtorrent) {
+  brave_browser_ui_deps += [
+    "//brave/browser/extensions",
+    "//brave/components/brave_webtorrent/browser",
+  ]
+}
